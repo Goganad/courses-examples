@@ -1,16 +1,20 @@
 package main
 
 import (
-	"errors"
 	"fmt"
+
+	"github.com/pkg/errors"
 )
 
 func main() {
-	err := runQuery("connect")
+	err := errors.Wrap(errors.New("test"), "и ещё одна ошибка")
+	fmt.Printf("Query error: %+v", err)
+
+	err = runQuery("connect")
 	if err != nil {
 		var connErr *ConnectionError
 		if errors.As(err, &connErr) {
-			fmt.Printf("Query error: %s, %+v", connErr.Msg, err)
+			fmt.Printf("Query error: %s", connErr.Msg)
 		}
 
 		var queryErr *QueryError
