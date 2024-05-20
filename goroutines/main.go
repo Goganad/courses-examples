@@ -93,6 +93,11 @@ func main() {
 	//	}
 	//}
 
+	args := make([]int, 0, 4)
+	test := []int{1, 2, 3, 4, 5}
+
+	test = append(test, args...)
+
 	ch := make(chan int)
 	stop := make(chan struct{}, 2)
 
